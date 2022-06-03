@@ -146,6 +146,7 @@ def final_hess_printout(hess_obj):
     wfn = psi4.core.Wavefunction.build(psi4_mol_obj, 'def2-tzvp')
     wfn.set_hessian(psi4.core.Matrix.from_array(hess_obj.result))
     wfn.set_energy(hess_obj.energy)
+    psi4.core.set_global_option("NORMAL_MODES_WRITE","True")
     psi4.core.set_variable("CURRENT ENERGY", hess_obj.energy)
     psi4.driver.vibanal_wfn(wfn)
     psi4.driver._hessian_write(wfn)    

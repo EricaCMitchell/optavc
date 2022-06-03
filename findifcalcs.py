@@ -466,6 +466,7 @@ class Hessian(FiniteDifferenceCalc):
         # version
         if '1.4' in psi_version:
             if self.options.dertype == 'ENERGY':
+                psi4.core.set_global_option("DISP_SIZE",0.010)
                 create = psi4.driver_findif.hessian_from_energies_geometries 
                 compute = psi4.driver_findif.assemble_hessian_from_energies
                 constructor = SinglePoint 
@@ -475,6 +476,7 @@ class Hessian(FiniteDifferenceCalc):
                 constructor = AnalyticGradient
         else:
             if self.options.dertype == 'ENERGY':
+                psi4.core.set_global_option("DISP_SIZE",0.010)
                 create = psi4.driver_findif.hessian_from_energy_geometries 
                 compute = psi4.driver_findif.compute_hessian_from_energies
                 constructor = SinglePoint 

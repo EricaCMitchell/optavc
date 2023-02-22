@@ -464,7 +464,7 @@ class Hessian(FiniteDifferenceCalc):
 
         # need to prevent the interpreter from seeing methods for the alternate
         # version
-        if '1.4' in psi_version:
+        if float(psi_version[:3]) >= 1.4:
             if self.options.dertype == 'ENERGY':
                 psi4.core.set_global_option("DISP_SIZE",0.010)
                 create = psi4.driver_findif.hessian_from_energies_geometries 

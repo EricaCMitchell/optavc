@@ -151,7 +151,7 @@ def final_hess_printout(hess_obj):
     psi4.core.set_variable("CURRENT ENERGY", hess_obj.energy)
     psi4.driver.vibanal_wfn(wfn)
     if psi_version <= 1.4:
-        psi4.driver._hessian_write(wfn)
+        psi4.driver.hessian_write(wfn)
     else:
         psi4.driver.driver_findif.hessian_write(wfn)    
 

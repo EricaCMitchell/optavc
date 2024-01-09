@@ -425,7 +425,7 @@ class Options(object):
             raise NotImplementedError("Fermi submit scripts have not been finalized.")
 
         if self.parallel == "":
-            if prog[0] in ['psi4', 'fermi']:
+            if prog[0] in ['psi4', 'fermi', 'quax']:
                 self.parallel = 'serial'
             elif prog[0] in ['orca', 'molpro']:
                 self.parallel = 'mpi'

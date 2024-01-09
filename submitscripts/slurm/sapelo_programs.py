@@ -8,6 +8,29 @@ julia {input_name}
 
 """
 
+quax = """cd $SLURM_SUBMIT_DIR
+export OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK}
+export KMP_DUPLICATE_LIB_OK=TRUE
+
+ml purge
+ml load Miniconda3
+source activate /home/ecm23353/psi_env/
+
+export PYTHONPATH="$HOME/Quax:$PYTHONPATH"
+
+export PSI_SCRATCH=/scratch/$USER/tmp/$SLURM_JOB_ID
+mkdir -p $PSI_SCRATCH
+
+echo " Running Quax on `hostname`"
+echo " Running calculation..."
+
+python grad.py >> output.dat
+
+echo " Job complete on `hostname`."
+
+rm $PSI_SCRATCH -r
+"""
+
 psi4 = """export PSI_SCRATCH=/scratch/$USER/tmp/$SLURM_JOB_ID
 mkdir -p $PSI_SCRATCH
 psi4 -n $NSLOTS
@@ -190,7 +213,8 @@ progdict = {
         "scratch": {
             "psi4": psi4,
             "cfour": cfour_serial,
-            "fermi": fermi
+            "fermi": fermi,
+            "quax": quax
             }
         },
     "mpi": {

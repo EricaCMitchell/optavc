@@ -8,15 +8,14 @@ julia {input_name}
 
 """
 
-quax = """cd $SLURM_SUBMIT_DIR
-export OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK}
-export KMP_DUPLICATE_LIB_OK=TRUE
+quax = """export OMP_NUM_THREADS=$NSLOTS
 
 ml purge
 ml load Miniconda3
 source activate /home/ecm23353/psi_env/
 
-export PYTHONPATH="$HOME/Quax:$PYTHONPATH"
+export PATH="$HOME/psi_env/include:$HOME/psi_env/bin:$PATH"
+export PYTHONPATH="$HOME/Quax:$HOME/psi_env/lib:$HOME:$PYTHONPATH"
 
 export PSI_SCRATCH=/scratch/$USER/tmp/$SLURM_JOB_ID
 mkdir -p $PSI_SCRATCH

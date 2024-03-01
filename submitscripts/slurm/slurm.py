@@ -1,6 +1,6 @@
 slurm_basic = """#!/bin/bash
 #SBATCH --partition={q}
-#SBATCH --constraint="EPYC|Intel"
+#SBATCH --constraint="EPYC"
 #SBATCH --job-name={name}
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task={nslots}

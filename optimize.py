@@ -32,6 +32,8 @@ class Optimization():
         self.copy_old_steps(restart_iteration, user_xtpl_restart)
 
         psi4_mol_obj = self.molecule.cast_to_psi4_molecule_object()
+        if self.options.point_group is not None:
+            psi4_mol_obj.reset_point_group(self.options.point_group)
         psi4.core.set_active_molecule(psi4_mol_obj)
         params = psi4.p4util.prepare_options_for_modules()
         optimizer_params = {k: v.get('value') for k, v in params.pop("OPTKING").items() if v.get('has_changed')}

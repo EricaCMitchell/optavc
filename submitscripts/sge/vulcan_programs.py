@@ -9,6 +9,21 @@ julia {input_name} --threads $NSLOTS
 
 """
 
+quax = """export OMP_NUM_THREADS=$NSLOTS
+export KMP_DUPLICATE_LIB_OK=TRUE
+
+# Upload F12 environment
+export PATH="$HOME/Code/bin/install_psi4/bin:$HOME/.conda/envs/f12/include:$HOME/.conda/envs/f12/bin:$PATH"
+export PYTHONPATH="$HOME/Code/bin/Quax:$HOME/.conda/envs/f12/lib:$HOME/.conda/envs/f12/lib/python3.1/site-packages:$PYTHONPATH"
+
+echo " Running on `hostname`"
+echo " Running calculation..."
+
+python grad.py >& output.dat
+
+echo " Job complete on `hostname`."
+"""
+
 molpro = """vulcan load molpro@2010.1.67+mpi
 molpro -n $NSLOTS --nouse-logfile --no-xml-output -o {output_name} {input_name}"""
 

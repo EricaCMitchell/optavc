@@ -138,6 +138,7 @@ progdict = {
             "psi4": psi4,
             "cfour": cfour_serial,
             "fermi": fermi,
+            "quax" : quax,
             "molpro": molpro_serial
         }
     },
